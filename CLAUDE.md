@@ -58,20 +58,35 @@ Two kinds live side by side in `.claude/skills/`:
 
 ## Slash commands
 
-`.claude/commands/` gives each bespoke skill a matching slash command —
-these are checked-in system prompts, not something to copy-paste from
-anywhere:
+`.claude/commands/` holds two kinds of checked-in command, not something to
+copy-paste from anywhere:
 
-- `/audit <domain>` → aeo-signal
-- `/competitor-intel <names or blank>` → competitor-intel ("Gossip Ella")
-- `/write-post <brief>` → content-writer
-- `/publish <channels>` → channel-publisher
-- `/brand <blank, or a fact to add/update>` → brand-memory
+1. **Skill commands** — one thin wrapper per bespoke skill, run inline in
+   the current session:
+   - `/audit <domain>` → aeo-signal
+   - `/competitor-intel <names or blank>` → competitor-intel ("Gossip Ella")
+   - `/write-post <brief>` → content-writer
+   - `/publish <channels>` → channel-publisher
+   - `/brand <blank, or a fact to add/update>` → brand-memory
 
-Each command is a short template using `$ARGUMENTS`, with a fallback that
-pulls from `brand-memory` (or asks) when no argument is given, rather than
-failing on empty input. Add a new command here whenever a new bespoke
-skill is added, so the pattern stays consistent.
+   Each is a short template using `$ARGUMENTS`, with a fallback that pulls
+   from `brand-memory` (or asks) when no argument is given, rather than
+   failing on empty input.
+
+2. **Agent commands** — one per subagent in `.claude/agents/`, using
+   `context: fork` + `agent: <name>` frontmatter so the command hands the
+   whole request to that specialist agent instead of running inline:
+   - `/strategy <task>` → marketing-strategy ("מצפן")
+   - `/content <task>` → marketing-content ("קול")
+   - `/seo-aeo <task>` → marketing-seo-aeo ("מכ״ם")
+   - `/acquisition <task>` → marketing-acquisition ("גשר")
+   - `/conversion <task>` → marketing-conversion ("מאזן")
+
+   Each is `$ARGUMENTS` plus a one-line fallback telling the agent to ask
+   the user rather than guess when no task was given.
+
+Add a new command here whenever a new bespoke skill or subagent is added,
+so the pattern stays consistent.
 
 ## Multi-agent marketing system
 
