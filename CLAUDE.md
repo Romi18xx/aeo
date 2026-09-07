@@ -20,6 +20,9 @@ where competitors get cited instead.
   audience, competitors) shared across the content skills.
 - `skills-lock.json` — lockfile for the skills pulled in from
   `coreyhaines31/marketingskills` (general marketing skill pack).
+- `.claude/commands/` — slash commands, one thin wrapper per bespoke skill
+  (see below), so triggering a skill is `/audit marketeam.ai` instead of
+  writing out a full sentence each time.
 
 ## Skills available on this project
 
@@ -48,6 +51,23 @@ Two kinds live side by side in `.claude/skills/`:
    - **brand-memory** — reads/writes `.claude/brand-memory.json` (voice,
      positioning, audience, key messages, competitors). The other three
      skills load it for consistency and write back durable findings.
+
+## Slash commands
+
+`.claude/commands/` gives each bespoke skill a matching slash command —
+these are checked-in system prompts, not something to copy-paste from
+anywhere:
+
+- `/audit <domain>` → aeo-signal
+- `/competitor-intel <names or blank>` → competitor-intel ("Gossip Ella")
+- `/write-post <brief>` → content-writer
+- `/publish <channels>` → channel-publisher
+- `/brand <blank, or a fact to add/update>` → brand-memory
+
+Each command is a short template using `$ARGUMENTS`, with a fallback that
+pulls from `brand-memory` (or asks) when no argument is given, rather than
+failing on empty input. Add a new command here whenever a new bespoke
+skill is added, so the pattern stays consistent.
 
 ## Working conventions
 
