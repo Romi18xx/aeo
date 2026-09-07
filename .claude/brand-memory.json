@@ -1,0 +1,52 @@
+{
+  "brand": "AEO Signal",
+  "company": "Marketeam",
+  "tagline": "Track how AI answer engines cite your brand",
+  "one_liner": "AEO Signal monitors ChatGPT, Perplexity, Gemini, and Copilot to show exactly how AI answer engines cite, describe, and rank your brand.",
+  "positioning": "A proof-of-concept AEO (Answer Engine Optimization) monitoring product for early AEO partners. Sits next to SEO tools but tracks a different surface: what AI assistants say about a brand, not what Google ranks.",
+  "audience": [
+    "Marketing / growth leaders at B2B SaaS companies who already invest in SEO and want visibility into AI-answer citations",
+    "Founders and marketers worried about competitors being cited instead of them in ChatGPT/Perplexity/Gemini/Copilot answers"
+  ],
+  "voice": {
+    "tone": [
+      "Direct and confident, never hypey",
+      "Data-first — leads with a real number, not an adjective",
+      "Plain English, short sentences, minimal jargon (define AEO on first use)",
+      "Slightly urgent without fear-mongering — frames gaps as fixable, not scary"
+    ],
+    "do": [
+      "Lead headlines with a concrete finding (\"Perplexity cites you most; Copilot is your biggest opportunity\")",
+      "Use specific numbers and counts (\"3 of 7 prompts\", \"+6.1 pts vs last 30 days\") over vague claims",
+      "Pair every claim with a next action (\"Publish a structured FAQ\")",
+      "Keep CTAs short and low-friction (\"Book a demo\", \"See a live signal report\")"
+    ],
+    "dont": [
+      "Don't invent precision that wasn't measured (no fake \"62/100\" scores)",
+      "Don't use marketing superlatives (\"revolutionary\", \"game-changing\", \"best-in-class\")",
+      "Don't bury the finding under throat-clearing — say the result in the headline"
+    ]
+  },
+  "proof_points": [
+    "Tracks 4 answer engines: ChatGPT, Perplexity, Gemini, Copilot",
+    "Runs thousands of real customer prompts against tracked engines daily",
+    "Weekly signal report plus real-time alerts when a competitor gains ground"
+  ],
+  "competitors": [],
+  "key_messages": [
+    "Getting cited by AI answer engines is a function of checkable things: entity clarity, structured data, and content shaped like an answer.",
+    "AEO is a different, additional surface from traditional SEO — ranking on Google doesn't guarantee being cited in an AI answer.",
+    "The gap list (prompts where you're not cited, and who is cited instead) is the most actionable output, more useful than a topline score."
+  ],
+  "links": {
+    "site": "index.html (this repo)"
+  },
+  "last_updated": "2026-08-27",
+  "changelog": [
+    {
+      "date": "2026-08-27",
+      "note": "Seeded from the AEO Signal landing page copy (index.html) when the brand-memory skill was installed.",
+      "source": "brand-memory skill install"
+    }
+  ]
+}
