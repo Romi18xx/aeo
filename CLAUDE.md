@@ -23,6 +23,10 @@ where competitors get cited instead.
 - `.claude/commands/` — slash commands, one thin wrapper per bespoke skill
   (see below), so triggering a skill is `/audit marketeam.ai` instead of
   writing out a full sentence each time.
+- `.claude/agents/` — five specialist marketing subagents (strategy, content,
+  SEO/AEO, acquisition, conversion) that partition all 54 skills between
+  them and hand work off to each other (see "Multi-agent marketing system"
+  below).
 
 ## Skills available on this project
 
@@ -69,6 +73,46 @@ pulls from `brand-memory` (or asks) when no argument is given, rather than
 failing on empty input. Add a new command here whenever a new bespoke
 skill is added, so the pattern stays consistent.
 
+## Multi-agent marketing system
+
+`.claude/agents/` defines five Hebrew-system-prompt subagents that split
+ownership of every skill in `.claude/skills/` (the `marketingskills` pack
+plus the bespoke ones) so a full marketing org — strategy through
+measurement — can be driven as a team instead of one agent trying to cover
+everything. Each agent's file is the complete, standalone system prompt
+(no external references needed to use it). All five embed the same shared
+ground rules: never fabricate facts/sources/numbers/prices, label
+fact vs. assumption vs. recommendation, stay on-brand (loaded from
+`brand-memory`), prioritize high-impact/reasonable-effort work, give every
+recommendation as goal → rationale → KPI → measurement → next step, hand
+off instead of working outside scope, and never publish, spend money, or
+contact anyone externally without explicit approval.
+
+| Agent (nickname) | Domain | Skills it owns |
+|---|---|---|
+| `marketing-strategy` ("מצפן"/Compass) | Strategy, research, market intel | `brand-memory`, `competitor-intel`, `competitor-profiling`, `customer-research`, `marketing-council`, `marketing-ideas`, `marketing-plan`, `marketing-psychology`, `product-marketing` |
+| `marketing-content` ("קול"/Voice) | Content, copy, brand distribution | `content-strategy`, `content-writer`, `copy-editing`, `copywriting`, `image`, `social`, `video`, `channel-publisher`, `competitors` |
+| `marketing-seo-aeo` ("מכ״ם"/Radar) | SEO, AEO, organic discovery | `aeo-signal`, `ai-seo`, `aso`, `directory-submissions`, `programmatic-seo`, `schema`, `seo-audit`, `site-architecture` |
+| `marketing-acquisition` ("גשר"/Bridge) | Paid acquisition, outbound, partnerships, community | `ads`, `ad-creative`, `cold-email`, `free-tools`, `lead-magnets`, `prospecting`, `co-marketing`, `community-marketing`, `events`, `influencer-marketing`, `launch`, `public-relations` |
+| `marketing-conversion` ("מאזן"/Ledger) | Conversion, revenue, retention, measurement | `cro`, `offers`, `onboarding`, `paywalls`, `popups`, `pricing`, `signup`, `churn-prevention`, `emails`, `referrals`, `sms`, `ab-testing`, `analytics`, `attribution`, `marketing-loops`, `revops` |
+
+Notes:
+- `sales-enablement` (from the `marketingskills` pack) isn't assigned to any
+  of the five — it predates this system and wasn't in scope when the
+  agents were defined.
+- Claude Code has no native way to restrict which skills a subagent may
+  invoke (the `skills:` frontmatter field only *preloads* content, it
+  doesn't gate the `Skill` tool) — the skill ownership above is enforced by
+  each agent's own system-prompt instructions, not by tooling. Don't rely
+  on it as a hard security boundary.
+- Typical flow: `marketing-strategy` turns a request into a brief →
+  `marketing-content` and/or `marketing-seo-aeo`/`marketing-acquisition`
+  produce assets and drive traffic → `marketing-conversion` measures and
+  optimizes → findings flow back to `marketing-strategy`. Any agent can
+  hand off directly to any other when it hits its boundary; a handoff
+  always carries goal, audience, message, assumptions, existing assets,
+  KPIs, and open questions.
+
 ## Working conventions
 
 - Custom, product-specific skills go in `.claude/skills/<name>/SKILL.md`
@@ -92,3 +136,9 @@ skill is added, so the pattern stays consistent.
 - `content-writer`, `competitor-intel`, `channel-publisher`, `brand-memory`
   added as the product-specific skill set, with `brand-memory.json` seeded
   from the landing page's existing copy.
+- Full `marketingskills` pack skill set built out (ads, cro, emails, seo,
+  retention, etc. — 54 skills total).
+- `.claude/agents/` five-agent marketing system added: strategy, content,
+  SEO/AEO, acquisition, and conversion agents, each with its own Hebrew
+  system prompt, exclusive skill ownership, fixed output format, and
+  explicit handoff rules to the other four.
