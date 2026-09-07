@@ -39,6 +39,11 @@ window.SKILLS_DATA = {
       "slug": "measurement",
       "label": "Measurement & Ops",
       "count": 5
+    },
+    {
+      "slug": "engine",
+      "label": "Brand Content Engine (this repo)",
+      "count": 4
     }
   ],
   "skills": [
@@ -99,6 +104,20 @@ window.SKILLS_DATA = {
       "summary": "When the user wants to figure out which marketing actually drives conversions and revenue, choose or interpret an attribution model, or reconcile conflicting numbers across tools."
     },
     {
+      "id": "brand-memory",
+      "title": "Brand Memory",
+      "category": "engine",
+      "categoryLabel": "Brand Content Engine (this repo)",
+      "summary": "Reads and updates the durable brand knowledge base for this project — voice, positioning, audience, key messages, proof points, and known competitors — so every content skill stays consistent."
+    },
+    {
+      "id": "channel-publisher",
+      "title": "Channel Publisher",
+      "category": "engine",
+      "categoryLabel": "Brand Content Engine (this repo)",
+      "summary": "Repurposes finished content into channel-native versions and a publishing schedule, and actually publishes or schedules it wherever a connected channel exists."
+    },
+    {
       "id": "churn-prevention",
       "title": "Churn Prevention",
       "category": "lifecycle",
@@ -127,6 +146,13 @@ window.SKILLS_DATA = {
       "summary": "Build and leverage online communities to drive product growth and brand loyalty."
     },
     {
+      "id": "competitor-intel",
+      "title": "Competitor Intel",
+      "category": "engine",
+      "categoryLabel": "Brand Content Engine (this repo)",
+      "summary": "Scans named or discovered competitors and returns real, sourced intelligence — positioning shifts, pricing changes, launches, messaging, and review sentiment. Internally nicknamed “Gossip Ella.”"
+    },
+    {
       "id": "competitor-profiling",
       "title": "Competitor Profiling",
       "category": "strategy",
@@ -146,6 +172,13 @@ window.SKILLS_DATA = {
       "category": "content",
       "categoryLabel": "Content & Copy",
       "summary": "When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover."
+    },
+    {
+      "id": "content-writer",
+      "title": "Content Writer",
+      "category": "engine",
+      "categoryLabel": "Brand Content Engine (this repo)",
+      "summary": "Writes blog posts and long-form content from a brief, matching this project's brand tone and voice."
     },
     {
       "id": "copy-editing",

@@ -12,9 +12,10 @@
   var statTotal = document.getElementById("stat-total");
   var statCategories = document.getElementById("stat-categories");
 
+  var SWATCH_COUNT = 9;
   var categoryIndex = {};
   data.categories.forEach(function (cat, i) {
-    categoryIndex[cat.slug] = (i % 8) + 1;
+    categoryIndex[cat.slug] = (i % SWATCH_COUNT) + 1;
   });
 
   if (statTotal) statTotal.textContent = data.skills.length;

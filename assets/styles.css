@@ -29,6 +29,7 @@
   --series-6: #16a3b6; /* teal   — category swatch 6 */
   --series-7: #c2417a; /* rose   — category swatch 7 */
   --series-8: #6b7280; /* slate  — category swatch 8 */
+  --series-9: #a15a2c; /* copper — category swatch 9 */
 
   --status-good:     #0ca30c;
   --status-critical: #d03b3b;
@@ -62,6 +63,7 @@
     --series-6: #2bb9cc;
     --series-7: #d65a91;
     --series-8: #8b93a3;
+    --series-9: #c9793f;
   }
 }
 :root[data-theme="dark"] {
@@ -87,6 +89,7 @@
   --series-6: #2bb9cc;
   --series-7: #d65a91;
   --series-8: #8b93a3;
+  --series-9: #c9793f;
 }
 
 /* ------------------------------------------------------------------ */
@@ -303,6 +306,7 @@ p { max-width: 62ch; }
 .dot-6 { background: var(--series-6); }
 .dot-7 { background: var(--series-7); }
 .dot-8 { background: var(--series-8); }
+.dot-9 { background: var(--series-9); }
 
 /* ------------------------------------------------------------------ */
 /* Sections & cards                                                     */

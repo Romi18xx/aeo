@@ -26,7 +26,7 @@
       <a href="skills.html" aria-current="page">Skills Console</a>
     </nav>
     <div class="header-actions">
-      <span class="tag live-tag"><span class="tag-dot"></span>51 skills loaded</span>
+      <span class="tag live-tag"><span class="tag-dot"></span>55 skills loaded</span>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
         <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg>
@@ -42,9 +42,11 @@
     <div class="wrap hero-inner">
       <p class="eyebrow tag"><span class="tag-dot"></span>Internal tool &middot; one catalog for the whole marketing skill pack</p>
       <h1>Every marketing skill your team can run — in one place.</h1>
-      <p class="hero-sub">This workspace ships with 51 Claude marketing skills, from paid ads to churn
-        prevention to AEO audits. Instead of guessing which one applies, search or filter here, then
-        describe the task to Claude or invoke the skill directly.</p>
+      <p class="hero-sub">This workspace ships with 55 Claude marketing skills — 51 from a general
+        marketing pack (paid ads, churn prevention, AEO audits, and more) plus 4 project-specific
+        skills that write, research, and publish content in this brand's own voice. Instead of
+        guessing which one applies, search or filter here, then describe the task to Claude or
+        invoke the skill directly.</p>
     </div>
   </section>
 
@@ -65,8 +67,11 @@
         </article>
 
         <article class="stat-tile stat-tile-flat">
-          <p class="stat-label">Source pack</p>
-          <p class="stat-value" style="font-size:1.05rem;">coreyhaines31/<wbr>marketingskills</p>
+          <p class="stat-label">Sources</p>
+          <ul class="stat-tags">
+            <li><i class="dot dot-1"></i>51 from coreyhaines31/<wbr>marketingskills</li>
+            <li><i class="dot dot-9"></i>4 custom to this repo</li>
+          </ul>
         </article>
 
         <article class="stat-tile stat-tile-flat">
@@ -134,7 +139,9 @@
           <span class="step-index">3</span>
           <h3>Or invoke one by name</h3>
           <p>Know exactly which skill you want? Type <code>/skill-name</code> to run it directly.
-            Versions and sources for the whole pack are pinned in <code>skills-lock.json</code>.</p>
+            The 51 general-purpose skills are version-pinned in <code>skills-lock.json</code>; the
+            4 <em>Brand Content Engine</em> skills are custom to this repo and share state through
+            <code>.claude/brand-memory.json</code>.</p>
         </li>
       </ol>
     </div>
