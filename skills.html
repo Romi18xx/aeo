@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Skills Console — the marketing skill catalog</title>
-<meta name="description" content="A browsable, searchable catalog of every marketing skill installed in this workspace — what each one does, which category it belongs to, and how to invoke it.">
+<meta name="description" content="A browsable, searchable catalog of every marketing skill installed in this workspace, organized under 5 domain agents — what each one does, which agent owns it, and how to invoke it.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,13 +40,14 @@
   <!-- Hero -->
   <section class="hero" id="top">
     <div class="wrap hero-inner">
-      <p class="eyebrow tag"><span class="tag-dot"></span>Internal tool &middot; one catalog for the whole marketing skill pack</p>
-      <h1>Every marketing skill your team can run — in one place.</h1>
+      <p class="eyebrow tag"><span class="tag-dot"></span>Internal tool &middot; 55 skills organized under 5 domain agents</p>
+      <h1>Five agents. Every marketing skill your team can run.</h1>
       <p class="hero-sub">This workspace ships with 55 Claude marketing skills — 51 from a general
-        marketing pack (paid ads, churn prevention, AEO audits, and more) plus 4 project-specific
-        skills that write, research, and publish content in this brand's own voice. Instead of
-        guessing which one applies, search or filter here, then describe the task to Claude or
-        invoke the skill directly.</p>
+        marketing pack plus 4 project-specific skills that write, research, and publish content in
+        this brand's own voice. Every skill is catalogued under one of five domain agents defined in
+        <code>.claude/agents/</code> — <strong>Strategist</strong>, <strong>Wordsmith</strong>,
+        <strong>Growth</strong>, <strong>Lifecycle</strong>, and <strong>Signal</strong> — so instead
+        of guessing which of 55 skills applies, you can delegate to the agent that owns the domain.</p>
     </div>
   </section>
 
@@ -62,7 +63,7 @@
         </article>
 
         <article class="stat-tile stat-tile-flat">
-          <p class="stat-label">Categories</p>
+          <p class="stat-label">Domain agents</p>
           <p class="stat-value" id="stat-categories">—</p>
         </article>
 
@@ -86,6 +87,18 @@
     </div>
   </section>
 
+  <!-- Agents -->
+  <section class="section" id="agents" aria-labelledby="agents-heading">
+    <div class="wrap">
+      <p class="tag"><span class="tag-dot"></span>Org chart</p>
+      <h2 id="agents-heading">Five agents, one marketing department</h2>
+      <p class="card-sub" style="margin-bottom:20px;">Every skill below reports to exactly one of
+        these five. Each agent's system prompt lives in
+        <code>.claude/agents/&lt;name&gt;.md</code> — click a card to see its skills.</p>
+      <div class="agent-row" id="agent-row"></div>
+    </div>
+  </section>
+
   <!-- Catalog -->
   <section class="section" id="catalog" aria-labelledby="catalog-heading">
     <div class="wrap">
@@ -94,7 +107,7 @@
           <div>
             <p class="tag"><span class="tag-dot"></span>Catalog</p>
             <h2 id="catalog-heading">Find the right skill</h2>
-            <p class="card-sub">Search by name or keyword, or filter by category.</p>
+            <p class="card-sub">Search by name or keyword, or filter by the agent that owns it.</p>
           </div>
         </div>
 
@@ -106,12 +119,12 @@
           <p class="results-count" id="results-count" role="status" aria-live="polite"></p>
         </div>
 
-        <div class="filter-row" id="filter-row" role="group" aria-label="Filter by category"></div>
+        <div class="filter-row" id="filter-row" role="group" aria-label="Filter by agent"></div>
 
         <div class="skill-grid" id="skill-grid"></div>
         <div class="empty-state" id="empty-state" hidden>
           <p>No skills match that search.</p>
-          <p>Try a different keyword, or clear the category filter.</p>
+          <p>Try a different keyword, or clear the agent filter.</p>
         </div>
       </div>
     </div>
@@ -121,27 +134,29 @@
   <section class="section section-alt" aria-labelledby="how-heading">
     <div class="wrap">
       <p class="tag"><span class="tag-dot"></span>Method</p>
-      <h2 id="how-heading">How the skill pack works</h2>
+      <h2 id="how-heading">How agents and skills fit together</h2>
       <ol class="steps">
         <li>
           <span class="step-index">1</span>
-          <h3>Skills live as Markdown playbooks</h3>
-          <p>Each entry here is a <code>SKILL.md</code> under <code>.claude/skills/</code> — a
-            playbook Claude follows for that job, with reference docs and examples alongside it.</p>
+          <h3>Skills are the playbooks</h3>
+          <p>Each catalog entry is a <code>SKILL.md</code> under <code>.claude/skills/</code> — a
+            specific, narrow playbook (write an ad, audit SEO, plan a launch) with references and
+            examples alongside it.</p>
         </li>
         <li>
           <span class="step-index">2</span>
-          <h3>Claude matches the task automatically</h3>
-          <p>Describe what you need in plain language and Claude reads the trigger phrases in each
-            skill's description to pick the right one — no need to memorize this list.</p>
+          <h3>Agents are the department heads</h3>
+          <p>Each domain agent is a <code>.claude/agents/&lt;name&gt;.md</code> system prompt that
+            owns a cluster of skills, decides how to use them, and hands off to another agent when a
+            task crosses domains — Strategist plans, Wordsmith writes, Growth acquires, Lifecycle
+            converts and retains, Signal owns search and AI visibility.</p>
         </li>
         <li>
           <span class="step-index">3</span>
-          <h3>Or invoke one by name</h3>
-          <p>Know exactly which skill you want? Type <code>/skill-name</code> to run it directly.
-            The 51 general-purpose skills are version-pinned in <code>skills-lock.json</code>; the
-            4 <em>Brand Content Engine</em> skills are custom to this repo and share state through
-            <code>.claude/brand-memory.json</code>.</p>
+          <h3>Invoke either one directly</h3>
+          <p>Describe a task in plain language and Claude routes it to the right agent or skill
+            automatically, or name one yourself: <code>/skill-name</code> for a specific playbook,
+            or ask for an agent by name (e.g. "have Growth look at this") to delegate the whole task.</p>
         </li>
       </ol>
     </div>
@@ -151,7 +166,7 @@
 
 <footer class="site-footer">
   <div class="wrap footer-row">
-    <p>Skills Console &mdash; internal catalog for the marketing skill pack in this workspace.</p>
+    <p>Skills Console &mdash; internal catalog for the 5-agent marketing department in this workspace.</p>
     <p class="footer-muted">Descriptions generated from each skill's own SKILL.md.</p>
   </div>
 </footer>

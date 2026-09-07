@@ -7,6 +7,7 @@
 
   var searchInput = document.getElementById("skill-search");
   var filterRow = document.getElementById("filter-row");
+  var agentRow = document.getElementById("agent-row");
   var resultsCount = document.getElementById("results-count");
   var emptyState = document.getElementById("empty-state");
   var statTotal = document.getElementById("stat-total");
@@ -22,6 +23,65 @@
   if (statCategories) statCategories.textContent = data.categories.length;
 
   var state = { query: "", category: "all" };
+
+  /* ---------------------------------------------------------------- */
+  /* Shared: select a category from either the chips or an agent card    */
+  /* ---------------------------------------------------------------- */
+  function selectCategory(slug) {
+    state.category = slug;
+    if (filterRow) {
+      Array.prototype.forEach.call(filterRow.children, function (c) {
+        c.setAttribute("aria-pressed", c.dataset.slug === slug ? "true" : "false");
+      });
+    }
+    render();
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Agent cards                                                          */
+  /* ---------------------------------------------------------------- */
+  function buildAgentCard(agent) {
+    var card = document.createElement("button");
+    card.type = "button";
+    card.className = "agent-card";
+    card.dataset.slug = agent.slug;
+
+    var swatch = document.createElement("i");
+    swatch.className = "dot dot-" + categoryIndex[agent.slug] + " agent-card-dot";
+    card.appendChild(swatch);
+
+    var name = document.createElement("h3");
+    name.textContent = agent.name;
+    card.appendChild(name);
+
+    var title = document.createElement("p");
+    title.className = "agent-card-title";
+    title.textContent = agent.title.replace(agent.name + " — ", "");
+    card.appendChild(title);
+
+    var mandate = document.createElement("p");
+    mandate.className = "agent-card-mandate";
+    mandate.textContent = agent.mandate;
+    card.appendChild(mandate);
+
+    var foot = document.createElement("p");
+    foot.className = "agent-card-count";
+    foot.textContent = agent.count + " skills";
+    card.appendChild(foot);
+
+    card.addEventListener("click", function () {
+      selectCategory(agent.slug);
+      var catalogHeading = document.getElementById("catalog");
+      if (catalogHeading) catalogHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    return card;
+  }
+
+  if (agentRow && data.agents) {
+    data.agents.forEach(function (agent) {
+      agentRow.appendChild(buildAgentCard(agent));
+    });
+  }
 
   /* ---------------------------------------------------------------- */
   /* Filter chips                                                        */
@@ -46,11 +106,7 @@
     chip.appendChild(countEl);
 
     chip.addEventListener("click", function () {
-      state.category = slug;
-      Array.prototype.forEach.call(filterRow.children, function (c) {
-        c.setAttribute("aria-pressed", c === chip ? "true" : "false");
-      });
-      render();
+      selectCategory(slug);
     });
     return chip;
   }
